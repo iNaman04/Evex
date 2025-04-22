@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/verificationLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="24dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/verificationTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Verify Your Email"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#1E88E5"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="80dp"/>
+
+    <!-- Message -->
+    <TextView
+        android:id="@+id/verificationMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="We’ve sent a verification link to your email.\nPlease check your inbox and verify your account to continue."
+        android:textSize="16sp"
+        android:gravity="center"
+        android:lineSpacingExtra="6dp"
+        android:textColor="#555555"
+        app:layout_constraintTop_toBottomOf="@id/verificationTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"/>
+
+    <!-- Button -->
+    <Button
+        android:id="@+id/btnVerified"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="#1E88E5"
+        android:paddingVertical="12dp"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/verificationMessage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

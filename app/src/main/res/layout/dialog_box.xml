@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:elevation="12dp"
+    android:background="@drawable/dialog_background">
+
+    <ProgressBar
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:indeterminate="true"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sending verification link..."
+        android:textSize="16sp"
+
+        android:textColor="@color/black"
+        android:layout_marginTop="16dp"
+        android:gravity="center" />
+
+</LinearLayout>

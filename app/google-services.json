@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "365788076261",
+    "project_id": "evex-1d605",
+    "storage_bucket": "evex-1d605.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365788076261:android:00248416a8b69a86b85c0c",
+        "android_client_info": {
+          "package_name": "com.example.evex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKoNNEIW8YDIG3dxYbkjWxV8nIdFxafTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
