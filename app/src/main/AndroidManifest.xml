@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Evex"
         tools:targetApi="31">
         <activity
+            android:name=".Club_login"
+            android:exported="false" />
+        <activity
             android:name=".Club_description"
             android:exported="false" />
         <activity
