@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Evex"
         tools:targetApi="31">
         <activity
+            android:name=".OTP_page"
+            android:exported="false" />
+        <activity
+            android:name=".OTP_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Club_login"
             android:exported="false" />
         <activity

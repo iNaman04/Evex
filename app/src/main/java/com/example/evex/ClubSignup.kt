@@ -72,21 +72,39 @@ class ClubSignup : AppCompatActivity() {
            }
 
            else{
+
                Utils.showVerificationDialog(this)
-               viewmodel.registerUser(this,email,password,number) {success, message ->
-                   Utils.dismissVerificationDialog()
-
-                   if (success) {
-                       dataViewmodel.saveUserData(number)
-                       Toast.makeText(baseContext, message, Toast.LENGTH_SHORT).show()
-                       startActivity(Intent(this, verification_page::class.java))
-                   } else {
-                       Toast.makeText(baseContext, message, Toast.LENGTH_SHORT).show()
-                   }
+               val intent = Intent(this, OTP_page::class.java)
+               intent.putExtra("number", number)
+               startActivity(intent)
+               Utils.dismissVerificationDialog()
 
 
 
-               }
+
+
+
+
+
+
+
+
+
+//               Utils.showVerificationDialog(this)
+//               viewmodel.registerUser(this,email,password,number) {success, message ->
+//                   Utils.dismissVerificationDialog()
+//
+//                   if (success) {
+//                       dataViewmodel.saveUserData(number)
+//                       Toast.makeText(baseContext, message, Toast.LENGTH_SHORT).show()
+//                       startActivity(Intent(this, verification_page::class.java))
+//                   } else {
+//                       Toast.makeText(baseContext, message, Toast.LENGTH_SHORT).show()
+//                   }
+//
+//
+//
+//               }
            }
 
        }
@@ -95,6 +113,7 @@ class ClubSignup : AppCompatActivity() {
 
 
     }
+
 
 
 
