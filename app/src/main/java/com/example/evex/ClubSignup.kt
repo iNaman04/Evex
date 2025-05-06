@@ -73,21 +73,13 @@ class ClubSignup : AppCompatActivity() {
 
            else{
 
+
                Utils.showVerificationDialog(this)
                val intent = Intent(this, OTP_page::class.java)
                intent.putExtra("number", number)
+               intent.putExtra("email", email)
                startActivity(intent)
                Utils.dismissVerificationDialog()
-
-
-
-
-
-
-
-
-
-
 
 
 //               Utils.showVerificationDialog(this)

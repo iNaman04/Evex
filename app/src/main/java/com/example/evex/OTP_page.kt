@@ -12,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.example.evex.AUTH.AuthViewmodel
+import com.example.evex.AUTH.Data_Viewmodel
 import com.example.evex.databinding.ActivityOtpPageBinding
 import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseException
@@ -32,16 +34,22 @@ class OTP_page : AppCompatActivity() {
 
     private lateinit var binding: ActivityOtpPageBinding
     private lateinit var viewmodel: AuthViewmodel
+    private lateinit var Dataviewmodel : Data_Viewmodel
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private var storedVerificationId: String? = null
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
 
 
     private lateinit var number : String
+    private lateinit var email : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         binding = ActivityOtpPageBinding.inflate(layoutInflater)
         viewmodel = ViewModelProvider(this).get(AuthViewmodel::class.java)
+        Dataviewmodel = ViewModelProvider(this).get(Data_Viewmodel::class.java)
+
+        email = intent.getStringExtra("email") ?: ""
         number = intent.getStringExtra("number") ?: ""
 
         Log.d("TAG", "Received number: $number")
@@ -86,6 +94,9 @@ class OTP_page : AppCompatActivity() {
         viewmodel.verificationSuccess.observe(this) { success ->
             if (success) {
                 Toast.makeText(this, "Verification successful", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, Club_description::class.java))
+                Dataviewmodel.saveUserData(email,number)
+
                 // Navigate to next screen
             } else {
                 Toast.makeText(this, "Verification failed", Toast.LENGTH_SHORT).show()
@@ -176,69 +187,5 @@ class OTP_page : AppCompatActivity() {
 
 
 
-//    private fun verifyotp(otp: String) {
-//        Log.d("TAG" , "verifyotp")
-//
-//        val verificationId = viewmodel.verificationId.value
-//        if (verificationId.isNullOrEmpty()) {
-//            Toast.makeText(baseContext, "Wait for OTP to be sent...", Toast.LENGTH_SHORT).show()
-//            Log.e("TAG", "Verification ID not ready")
-//            return
-//        }
-//
-//
-//        viewmodel.signInWithPhoneAuthCredential(otp)
-//        Log.d("TAG" , "signincredentialcalled")
-//        lifecycleScope.launch {
-//            viewmodel.isSignedin.collect{
-//                if (it){
-//                    Toast.makeText(baseContext, "Logged in", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
-//    }
-//
-//
-//    private fun login() {
-//        Log.d("OTPFragment", "login() function called")
-//        binding.btnVerifyOtp.setOnClickListener{
-//            val editText = arrayOf(binding.otp1,binding.otp2,binding.otp3,binding.otp4,binding.otp5,binding.otp6)
-//            val otp = editText.joinToString { it.text.toString() }
-//            if (otp.length < editText.size){
-//                Toast.makeText(baseContext, "Enter a Valid otp", Toast.LENGTH_SHORT).show()
-//            }
-//            else{
-//                verifyotp(otp)
-//            }
-//
-//        }
-//    }
-//
-//
-//
-//
-//
-//    private fun sendOTP() {
-//
-//        Log.d("TAG", "send OTP called")
-//
-//        viewmodel.apply {
-//            Log.d("TAG", "send OTP called")
-//            sendOTP(number, this@OTP_page)
-//            Log.d("TAG", "send OTP called")
-//            lifecycleScope.launch {
-//                Log.d("TAG", "send OTP called")
-//                otpsent.collect{
-//                    Log.d("TAG", "send OTP called")
-//                    if (it){
-//                        Toast.makeText(baseContext, "OTP Sent", Toast.LENGTH_SHORT).show()
-//
-//
-//                    }
-//                }
-//
-//            }
-//        }
-//    }
-//
+
 

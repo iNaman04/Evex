@@ -1,5 +1,6 @@
 package com.example.evex.AUTH
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,34 +13,93 @@ class Data_Viewmodel : ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
-    val _userSaveSuccess = MutableLiveData<Boolean>()
+    var _userSaveSuccess = MutableLiveData<Boolean>()
     val userSaveSuccess: LiveData<Boolean> get() = _userSaveSuccess
 
-    val _errorMessage = MutableLiveData<String>()
+    var _errorMessage = MutableLiveData<String>()
     val errorMessage : LiveData<String> get() = _errorMessage
 
-    fun saveUserData(number : String){
+    fun saveUserData(email: String, phone: String) {
+
+        val user = hashMapOf(
+            "email" to email,
+            "phone" to phone
+        )
 
         val uid = auth.currentUser?.uid
-        val email = auth.currentUser?.email
-
-        if (uid != null && email!= null){
-            val user = ClubUser(email = email , phoneNumber = number)
-            db.collection("ClubUsers").document(uid).set(user)
+        if (uid != null) {
+            db.collection("users").document(uid)
+                .set(user)
                 .addOnSuccessListener {
+                    Log.d("TAG", "User data stored")
+                }
+                .addOnFailureListener { e ->
+                    Log.w("TAG", "Error storing user data", e)
+                }
+        } else {
+            Log.w("TAG", "User UID is null")
+        }
+    }
+
+    fun saveClubData(clubName: String, collegeName: String, universityName: String, description: String, category: String) {
+        val club = hashMapOf(
+            "clubName" to clubName,
+            "collegeName" to collegeName,
+            "universityName" to universityName,
+            "description" to description,
+            "category" to category
+        )
+
+        val uid = auth.currentUser?.uid
+        if (uid != null) {
+            // Store club data in the 'clubs' sub-collection under the user's document
+            db.collection("users")
+                .document(uid)
+                .collection("clubs")
+                .document() // This creates a new document with a unique ID in the 'clubs' collection
+                .set(club)
+                .addOnSuccessListener {
+                    Log.d("TAG", "Club data stored successfully")
+                }
+                .addOnFailureListener { e ->
+                    Log.w("TAG", "Error storing club data", e)
+                }
+        } else {
+            Log.w("TAG", "User UID is null")
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    fun createClubuser(email : String, password : String){
+
+        auth.createUserWithEmailAndPassword(email,password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful){
                     _userSaveSuccess.value = true
                 }
-                .addOnFailureListener {
-                    _errorMessage.value = it.message
+                else{
+                    _userSaveSuccess.value = false
                 }
-        }
-        else{
-            _errorMessage.value = "User not authenticated"
-        }
+            }
 
 
     }
-
 
 
 
